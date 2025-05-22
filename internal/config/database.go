@@ -22,11 +22,15 @@ func InitDB() {
 	DB = db
 
 	if os.Getenv("ENV") == "development" && DB.Find(&models.Blog{}).RowsAffected == 0 {
-		db.Create(&models.Blog{Title: "Blog 1", Content: "Content 1"})
-		db.Create(&models.Blog{Title: "Blog 2", Content: "Content 2"})
+		DBSeed()
 	}
 }
 
 func GetDB() *gorm.DB {
 	return DB
+}
+
+func DBSeed() {
+	DB.Create(&models.Blog{Title: "Blog 1", Content: "Content 1"})
+	DB.Create(&models.Blog{Title: "Blog 2", Content: "Content 2"})
 }
