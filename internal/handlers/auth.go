@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/Dilgo-dev/GinMX/internal/config"
@@ -10,8 +11,6 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
-
-var secretKey = []byte("secret-key")
 
 func RegisterPage(c *gin.Context) {
 	c.HTML(http.StatusOK, "register.html", gin.H{
@@ -44,6 +43,14 @@ func LoginPage(c *gin.Context) {
 }
 
 func LoginPost(c *gin.Context) {
+	if os.Getenv("SECRET_KEY") == "" {
+		c.HTML(http.StatusInternalServerError, "login.html", gin.H{
+			"title": "Gin + HTMX - Login 🦥",
+			"error": "SECRET_KEY is not set",
+		})
+		return
+	}
+
 	email := c.PostForm("email")
 	password := c.PostForm("password")
 
@@ -72,7 +79,7 @@ func LoginPost(c *gin.Context) {
         "exp": time.Now().Add(time.Hour * 24).Unix(), 
         })
 
-	tokenString, err := token.SignedString(secretKey)
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
 	if err != nil {
 		c.HTML(http.StatusInternalServerError, "login.html", gin.H{
 			"title": "Gin + HTMX - Login 🦥",
