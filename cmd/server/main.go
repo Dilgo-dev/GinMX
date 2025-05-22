@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -19,10 +20,14 @@ func main() {
 	}
 
 	r := gin.Default()
+	r.LoadHTMLGlob("internal/templates/*")
+	r.Static("/static", "./static")
+
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello, World!",
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"title": "Gin + HTMX 🦥",
 		})
 	})
+
 	r.Run(":" + port)
 }
