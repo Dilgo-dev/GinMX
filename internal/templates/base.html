@@ -11,17 +11,27 @@
 </head>
 
 <body>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo"><span class="emoji">🦥</span>GinMX</h1>
+            <nav class="nav">
+                <a href="/" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Accueil</span>
+                </a>
+                <a href="/login" class="nav-link">
+                    <span class="nav-icon">🔐</span>
+                    <span class="nav-text">Connexion</span>
+                </a>
+                <a href="/register" class="nav-link nav-link-primary">
+                    <span class="nav-icon">✨</span>
+                    <span class="nav-text">Inscription</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
-        <header class="header">
-            <h1>🦥 GinMX</h1>
-        </header>
-
-        <nav class="nav">
-            <a href="/">🏠 Accueil</a>
-            <a href="/login">🔐 Connexion</a>
-            <a href="/register">✨ Inscription</a>
-        </nav>
-
         <main class="content">
             {{.content}}
         </main>
