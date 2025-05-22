@@ -2,20 +2,32 @@
 {{define "home"}}
 <div class="welcome">
     <h2>Bienvenue sur GinMX</h2>
-    <p>Découvrez nos articles de blog :</p>
+    <p>Découvrez nos derniers articles et plongez dans l'univers du développement web 🚀</p>
 </div>
 
 {{if .blogs}}
-{{range .blogs}}
-<div class="blog-post">
-    <h2>{{.Title}}</h2>
-    <p>{{.Content}}</p>
-    <small>Publié le {{.CreatedAt.Format "02/01/2006"}}</small>
+<div class="blog-grid">
+    {{range .blogs}}
+    <article class="blog-post">
+        <span class="emoji">📝</span>
+        <h3>{{.Title}}</h3>
+        <p>{{.Content}}</p>
+        <small>
+            <span>📅</span>
+            Publié le {{.CreatedAt.Format "02/01/2006"}}
+        </small>
+        <a href="#" class="read-more">
+            Lire la suite
+            <span>→</span>
+        </a>
+    </article>
+    {{end}}
 </div>
-{{end}}
 {{else}}
-<div class="blog-post">
+<div class="empty-state">
+    <span class="emoji">🦥</span>
     <p>Aucun article disponible pour le moment.</p>
+    <p>Revenez bientôt pour découvrir du nouveau contenu !</p>
 </div>
 {{end}}
 {{end}}

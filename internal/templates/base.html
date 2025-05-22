@@ -7,27 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.title}}</title>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="header">
+        <header class="header">
             <h1>🦥 GinMX</h1>
-        </div>
+        </header>
 
-        <div class="nav">
-            <a href="/">Accueil</a>
-            <a href="/login">Connexion</a>
-            <a href="/register">Inscription</a>
-        </div>
+        <nav class="nav">
+            <a href="/">🏠 Accueil</a>
+            <a href="/login">🔐 Connexion</a>
+            <a href="/register">✨ Inscription</a>
+        </nav>
 
-        <div class="content">
+        <main class="content">
             {{.content}}
-        </div>
+        </main>
 
-        <div class="footer">
-            <p>&copy; 2025 GinMX - Projet pédagogique</p>
-        </div>
+        <footer class="footer">
+            <p>&copy; 2025 GinMX - Projet pédagogique avec 💙</p>
+        </footer>
     </div>
 </body>
 
