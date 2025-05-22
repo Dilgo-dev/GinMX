@@ -9,6 +9,10 @@
 <body>
     <div class="container">
         <h1>{{.title}}</h1>
+        {{range .blogs}}
+            <h2>{{.Title}}</h2>
+            <p>{{.Content}}</p>
+        {{end}}
     </div>
 </body>
 </html>
