@@ -1,0 +1,35 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦥 GinMX</h1>
+        </div>
+
+        <div class="nav">
+            <a href="/">Accueil</a>
+            <a href="/login">Connexion</a>
+            <a href="/register">Inscription</a>
+        </div>
+
+        <div class="content">
+            {{.content}}
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 GinMX - Projet pédagogique</p>
+        </div>
+    </div>
+</body>
+
+</html>
+{{end}}

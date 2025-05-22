@@ -1,0 +1,21 @@
+{{template "base" .}}
+{{define "home"}}
+<div class="welcome">
+    <h2>Bienvenue sur GinMX</h2>
+    <p>Découvrez nos articles de blog :</p>
+</div>
+
+{{if .blogs}}
+{{range .blogs}}
+<div class="blog-post">
+    <h2>{{.Title}}</h2>
+    <p>{{.Content}}</p>
+    <small>Publié le {{.CreatedAt.Format "02/01/2006"}}</small>
+</div>
+{{end}}
+{{else}}
+<div class="blog-post">
+    <p>Aucun article disponible pour le moment.</p>
+</div>
+{{end}}
+{{end}}

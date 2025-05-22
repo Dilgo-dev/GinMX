@@ -22,7 +22,7 @@ func main() {
 	}
 
 	r := gin.Default()
-	r.LoadHTMLGlob("internal/templates/*")
+	r.LoadHTMLGlob("internal/templates/*.html")
 	r.Static("/static", "./static")
 
 	r.GET("/", handlers.GetBlog)

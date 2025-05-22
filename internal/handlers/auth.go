@@ -1,20 +1,25 @@
 package handlers
 
 import (
+	"html/template"
 	"net/http"
 	"os"
 	"time"
 
 	"github.com/Dilgo-dev/GinMX/internal/config"
 	"github.com/Dilgo-dev/GinMX/internal/models"
+	"github.com/Dilgo-dev/GinMX/internal/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func RegisterPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "register.html", gin.H{
-		"title": "Gin + HTMX - Register 🦥",
+	registerContent, _ := utils.RenderTemplate("register", gin.H{})
+
+	c.HTML(http.StatusOK, "base", gin.H{
+		"title":   "Gin + HTMX - Register 🦥",
+		"content": template.HTML(registerContent),
 	})
 }
 
@@ -37,8 +42,11 @@ func RegisterPost(c *gin.Context) {
 }
 
 func LoginPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "login.html", gin.H{
-		"title": "Gin + HTMX - Login 🦥",
+	loginContent, _ := utils.RenderTemplate("login", gin.H{})
+
+	c.HTML(http.StatusOK, "base", gin.H{
+		"title":   "Gin + HTMX - Login 🦥",
+		"content": template.HTML(loginContent),
 	})
 }
 
@@ -73,11 +81,11 @@ func LoginPost(c *gin.Context) {
 		return
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, 
-        jwt.MapClaims{ 
-        "username": user.Email, 
-        "exp": time.Now().Add(time.Hour * 24).Unix(), 
-        })
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256,
+		jwt.MapClaims{
+			"username": user.Email,
+			"exp":      time.Now().Add(time.Hour * 24).Unix(),
+		})
 
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
 	if err != nil {
