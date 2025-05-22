@@ -19,6 +19,7 @@ func InitDB() {
 		log.Fatal(err)
 	}
 	db.AutoMigrate(&models.Blog{})
+	db.AutoMigrate(&models.User{})
 	DB = db
 
 	if os.Getenv("ENV") == "development" && DB.Find(&models.Blog{}).RowsAffected == 0 {
