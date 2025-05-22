@@ -20,6 +20,11 @@ func InitDB() {
 	}
 	db.AutoMigrate(&models.Blog{})
 	DB = db
+
+	if os.Getenv("ENV") == "development" && DB.Find(&models.Blog{}).RowsAffected == 0 {
+		db.Create(&models.Blog{Title: "Blog 1", Content: "Content 1"})
+		db.Create(&models.Blog{Title: "Blog 2", Content: "Content 2"})
+	}
 }
 
 func GetDB() *gorm.DB {
