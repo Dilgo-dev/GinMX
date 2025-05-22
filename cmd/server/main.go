@@ -26,6 +26,8 @@ func main() {
 	r.Static("/static", "./static")
 
 	r.GET("/", handlers.GetBlog)
+	r.GET("/register", handlers.RegisterPage)
+	r.POST("/register", handlers.RegisterPost)
 
 	r.Run(":" + port)
 }
