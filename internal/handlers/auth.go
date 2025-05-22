@@ -2,12 +2,16 @@ package handlers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/Dilgo-dev/GinMX/internal/config"
 	"github.com/Dilgo-dev/GinMX/internal/models"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
+
+var secretKey = []byte("secret-key")
 
 func RegisterPage(c *gin.Context) {
 	c.HTML(http.StatusOK, "register.html", gin.H{
@@ -62,5 +66,20 @@ func LoginPost(c *gin.Context) {
 		return
 	}
 
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, 
+        jwt.MapClaims{ 
+        "username": user.Email, 
+        "exp": time.Now().Add(time.Hour * 24).Unix(), 
+        })
+
+	tokenString, err := token.SignedString(secretKey)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "login.html", gin.H{
+			"title": "Gin + HTMX - Login 🦥",
+			"error": "Failed to generate token",
+		})
+	}
+
+	c.SetCookie("token", tokenString, 3600, "/", "localhost", false, true)
 	c.Redirect(http.StatusFound, "/")
 }
