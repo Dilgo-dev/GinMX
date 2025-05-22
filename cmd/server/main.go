@@ -28,6 +28,8 @@ func main() {
 	r.GET("/", handlers.GetBlog)
 	r.GET("/register", handlers.RegisterPage)
 	r.POST("/register", handlers.RegisterPost)
+	r.GET("/login", handlers.LoginPage)
+	r.POST("/login", handlers.LoginPost)
 
 	r.Run(":" + port)
 }
