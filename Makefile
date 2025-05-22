@@ -28,7 +28,7 @@ dev-shell:
 
 dev-db:
 	@echo "🗄️ Connexion à PostgreSQL..."
-	docker compose -f docker-compose.dev.yml exec postgres psql -U quillstream -d quillstream_dev
+	docker compose -f docker-compose.dev.yml exec postgres psql -U ginmx -d ginmx_dev
 
 install-air:
 	@echo "📦 Installation d'Air..."
