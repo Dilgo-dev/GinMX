@@ -1,17 +1,83 @@
 {{define "login"}}
-<h2>Connexion</h2>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <span class="auth-emoji">🔐</span>
+            <h2>Bon retour parmi nous !</h2>
+            <p>Connectez-vous pour accéder à votre compte</p>
+        </div>
 
-{{if .error}}
-<div class="error">{{.error}}</div>
-{{end}}
+        {{if .error}}
+        <div class="alert alert-error">
+            <span class="alert-icon">⚠️</span>
+            <span>{{.error}}</span>
+        </div>
+        {{end}}
 
-<form action="/login" method="post">
-    <input type="email" name="email" placeholder="Adresse email" required>
-    <input type="password" name="password" placeholder="Mot de passe" required>
-    <button type="submit">Se connecter</button>
-</form>
+        <form action="/login" method="post" class="auth-form">
+            <div class="form-group">
+                <label for="email" class="form-label">
+                    <span>📧</span>
+                    Adresse email
+                </label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="vous@exemple.com" required
+                    autocomplete="email">
+            </div>
 
-<p>
-    Pas encore de compte ? <a href="/register">Créer un compte</a>
-</p>
+            <div class="form-group">
+                <label for="password" class="form-label">
+                    <span>🔑</span>
+                    Mot de passe
+                </label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="password" name="password" class="form-input"
+                        placeholder="Votre mot de passe" required autocomplete="current-password">
+                    <button type="button" class="password-toggle" onclick="togglePassword()">
+                        <span class="password-show">👁️</span>
+                        <span class="password-hide" style="display: none;">🙈</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-login">
+                <span>Se connecter</span>
+                <span class="btn-icon">→</span>
+            </button>
+        </form>
+
+        <div class="auth-separator">
+            <span>ou</span>
+        </div>
+
+        <div class="auth-switch">
+            <p>Pas encore de compte ?</p>
+            <a href="/register" class="link-primary">
+                <span>✨</span>
+                Créer un compte gratuitement
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const showIcon = document.querySelector('.password-show');
+        const hideIcon = document.querySelector('.password-hide');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            showIcon.style.display = 'none';
+            hideIcon.style.display = 'inline';
+        } else {
+            passwordInput.type = 'password';
+            showIcon.style.display = 'inline';
+            hideIcon.style.display = 'none';
+        }
+    }
+</script>
 {{end}}
